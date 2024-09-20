@@ -23,6 +23,7 @@ body {
 
 .splash-image{
     width:100%;
+    height:auto;
 }
 .main-navbar {
     position: absolute;
@@ -42,6 +43,27 @@ body {
     justify-content:flex-end;
 }
 
-.home-start{
+.front-image{
+    position:relative;
+    
+}
 
+.image-label{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    color:white;
+    font-size: 15vw;
+    font-weight: bold;    
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.center-test {
+    position: absolute; /* Make it position relative to the parent container */
+    left: 50%; /* Move it to the middle of the container horizontally */
+    transform: translateX(-50%); /* Adjust its position by half of its own width to center it */
+    font-size: 24px; /* Optional: Increase font size for visibility */
+    font-weight: bold;
 }
