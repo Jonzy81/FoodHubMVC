@@ -33,9 +33,12 @@ body {
     background: transparent;
     padding: 0.5rem 1rem;
 }
+.navbar-static{
+    position: relative;
+}
 .nav-brand{
-    display:flex
-    align-content:flex-start
+    display:flex;
+    
 }
 
 .header-items{
@@ -48,22 +51,82 @@ body {
     
 }
 
-.image-label{
-    position:absolute;
-    top:50%;
-    left:50%;
+.image-label {
+    position: absolute;
+    top: 35vw;
+    left: 50%;
     transform: translate(-50%, -50%);
-    color:white;
+    color: white;
     font-size: 15vw;
-    font-weight: bold;    
+    font-weight: bold;
     padding: 10px 20px;
     border-radius: 5px;
 }
 
 .center-test {
-    position: absolute; /* Make it position relative to the parent container */
-    left: 50%; /* Move it to the middle of the container horizontally */
-    transform: translateX(-50%); /* Adjust its position by half of its own width to center it */
-    font-size: 24px; /* Optional: Increase font size for visibility */
+    
+    font-size: 2rem; 
     font-weight: bold;
+}
+
+.about-container {
+    background-color: #d0f4de;
+}
+.about-text {
+    margin: 0;
+    text-align:center;
+    font-size:1rem;
+    padding-left:15vw;
+    padding-right:15vw;
+    padding-bottom:5vw;
+}
+.title-text {
+    display: flex;
+    font-size: 5vw;
+    justify-content: center;
+    padding-top: 5vw;
+    padding-bottom:1vw;
+    font-weight:bold;
+}
+.street-view{
+    width:100%;
+}
+.carousel-image{
+    object-fit:cover;
+    width:100%;
+}
+.menu-name {
+    font-weight: bold;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.menu-description {
+    text-align: center;
+   
+}
+.card-header{
+    display:flex;
+    justify-content:center;
+    font-weight:bold;
+    font-size:2rem;
+}
+.menu-placement {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: fit-content;
+}
+.card {
+    /*--bs-card-border-width: 0;*/
+   /* margin-bottom: 1rem;*/
+    --bs-border-radius: none;
+    max-height: fit-content;  
+}
+.header-container {
+    display: flex;
+    /* margin-right: 1.5rem; */
+    /* margin-left: 1.5rem; */
+    justify-content: center;
 }
