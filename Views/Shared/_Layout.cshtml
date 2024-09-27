@@ -23,22 +23,28 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Menu">Menu</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="MenuItem" asp-action="MenuItem">Menu</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="header-container">
-        <main role="main" class="pb-3">
+    <div class="header-container bg-primary">
+        <main role="main" class="pb-3 main-padding">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - FoodHubMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted bg-secondary">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                &copy; 2024 - Food*Hub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <div class="ms-auto">
+                <a asp-area="" asp-controller="Admin" asp-action="AdminLogin">Admin</a>
+            </div>
+            
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

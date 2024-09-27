@@ -31,7 +31,7 @@ namespace FoodHubMVC.Controllers
 
         public IActionResult Menu()
         {
-            ViewBag.NavbarClass = "navbar-dark bg-dark navbar-static";
+            
             return View();
         }
 
@@ -40,6 +40,7 @@ namespace FoodHubMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
 
         
     }
