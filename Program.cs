@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace FoodHubMVC
 {
     public class Program
@@ -5,6 +7,21 @@ namespace FoodHubMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/AdminController/Login";
+                });
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddHttpClient();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -24,6 +41,7 @@ namespace FoodHubMVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

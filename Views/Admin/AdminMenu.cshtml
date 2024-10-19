@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MenuItemViewModel>
+
+<div class="container bg-primary">
+    <!-- Group the menu items by MenuType -->
+    @foreach (var group in Model.GroupBy(item => item.MenuType))
+
+    {
+        <!-- Display MenuType as a section title -->
+        <h3 class="mt-4 text-white bg-success p-3 rounded">@group.Key</h3> <!-- Group.Key represents the MenuType -->
+        <!-- List items under each MenuType -->
+        <ul class="list-group mb-4">
+            @foreach (var item in group)
+
+            {
+                <content class="d-flex flex-row align-items-start">
+                    <li class="menuContainer list-group-item bg-secondary text-white mb-2">
+                        <!-- Use d-flex to place content and the action button side by side -->
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <div class="d-flex flex-row">
+
+                                    <div class="menu-name font-weight-bold">
+                                        @item.MenuName
+                                    </div>
+                                    <div class="menu-price">
+                                        @item.Price spänn  <!-- Display price -->
+                                    </div>
+                                </div>
+                                <div class="menu-description">
+                                    <em>@item.Description</em>  <!-- Display description -->
+                                </div>
+                            </div>
+                            <div class="text-end">
+                            </div>
+                        </div>
+                       
+                    </li>
+                    <!-- Place the action button to the right of the content -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@item.MenuId">Edit</a></li>
+                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.MenuId">Delete</a></li>
+                        </ul>
+                    </div>
+                </content>                
+                
+        
+            }
+            </ul>
+    }
+</div>

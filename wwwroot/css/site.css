@@ -145,3 +145,14 @@ body {
 .login-text {
     color: white !important;
 }
+
+.menu-placement{
+    padding: 2rem;
+}
+
+.menu-name{
+    padding:0;
+}
+.menuContainer {
+    width:40vw;
+}
