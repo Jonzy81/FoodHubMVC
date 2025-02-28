@@ -100,7 +100,7 @@ body {
     padding-bottom:0rem !important;
 }
 
-.menu-name {
+/*.menu-name {
     font-weight: bold;
     padding: 1rem;
     display: flex;
@@ -109,7 +109,7 @@ body {
 .menu-description {
     text-align: center;
    
-}
+}*/
 .card-header{
     display:flex;
     justify-content:center;
@@ -150,9 +150,15 @@ body {
     padding: 2rem;
 }
 
-.menu-name{
+.menuPrice{
     padding:0;
+    text-align: right;
+    margin-left: auto;
 }
 .menuContainer {
     width:40vw;
+}
+
+.row{
+    display: flex;
 }

@@ -1,154 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<MenuItemViewModel>
 
-<div class="menu-placement bg-secondary">
-    <div class="card " style="width: 35rem;">
-        <div class="card-header bg-primary text-white">
-            Förrätt
-        </div>
-        <ul class="list-group list-group-flush menu-border">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
-        </ul>
-    </div>
+<div class="container bg-primary">
+    <!-- Group the menu items by MenuType -->
+    @foreach (var group in Model.GroupBy(item => item.MenuType))
 
-    <div class="card " style="width: 35rem;">
-        <div class="card-header bg-primary text-white">
-            Varmrätt
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-    </div>
+    {
+        <!-- Display MenuType as a section title -->
+        <h3 class="mt-4 text-white bg-success p-3 rounded">@group.Key</h3> <!-- Group.Key represents the MenuType -->
+        <!-- List items under each MenuType -->
+        <ul class="list-group mb-4">
+            @foreach (var item in group)
 
-</div>
-<div class="menu-placement bg-secondary">
-    <div class="card " style="width: 35rem;">
-        <div class="card-header bg-primary text-white">
-            Dessert
-        </div>
-        <ul class="list-group list-group-flush menu-border">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
+            {
+                <content class="d-flex flex-row align-items-start">
+                <li class="menuContainer list-group-item bg-secondary text-white mb-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="menu-name fw-bold">
+                                @item.MenuName
+                        </div>
+                        <div class="menuPrice ms-auto">
+                                @item.Price spänn
+                        </div>
+                    </div>
+                    <div class="menu-description text-start">
+                        <em>@item.Description</em>
+                    </div>
+                </li>
+                </content>
+            }
         </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    Klassisk biff tartar 185 spänn
-                </div>
-                <div class="menu-description">
-                    <em>Silverlök, rödbetor, kapris, dijonnaise</em>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="card " style="width: 35rem;">
-        <div class="card-header bg-primary text-white">
-            Dryck
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-        <ul class="list-group list-group-flush ">
-            <li class="list-group-item bg-secondary text-white">
-                <div class="menu-name ">
-                    HALSTRAD RÖDING 315 spänn
-                </div>
-                <div class="menu-description">
-                    <em>ROSTADE ROTFRUKTER, RÄDISA, PICKLAD SILVERLÖK OCH HUMMERVELOUTÉ</em>
-                </div>
-            </li>
-        </ul>
-    </div>
-
+    }
 </div>
