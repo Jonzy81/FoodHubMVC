@@ -3,6 +3,15 @@
 <h2>Add New Menu Item</h2>
 <form asp-action="Add" method="post">
     <div class="mb-3">
+        <label class="form-label">Type</label>
+        <select class="form-control" asp-for="MenuType" required>
+            <option value="">Select Menu Type</option>
+            <option value="Förrätt">Förrätt</option>
+            <option value="Varmrätt">Varmrätt</option>
+            <option value="Dessert">Dessert</option>
+        </select>
+    </div>
+    <div class="mb-3">
         <label class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="MenuName" required>
     </div>

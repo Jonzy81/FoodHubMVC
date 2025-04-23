@@ -8,7 +8,6 @@ namespace FoodHubMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -16,22 +15,16 @@ namespace FoodHubMVC.Controllers
 
         public IActionResult Index()
         {
-            // Read the content of the text file
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "assets", "AboutText.txt");
             string aboutText = System.IO.File.ReadAllText(filePath);
 
-            // Replace newlines (\n) with <br> tags
             aboutText = aboutText.Replace("\n", "<br>");
-
-            // Pass the modified text to the view
             ViewData["AboutText"] = aboutText;
-
             return View();
         }
 
         public IActionResult Menu()
-        {
-            
+        {   
             return View();
         }
 
@@ -40,8 +33,5 @@ namespace FoodHubMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
-        
     }
 }

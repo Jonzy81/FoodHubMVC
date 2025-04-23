@@ -1,20 +1,32 @@
 ﻿@model MenuItemViewModel
 
-<h2>Edit Menu Item</h2>
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="MenuId">
+<h2 class="text-white text-center mb-4">Edit Menu Item</h2>
+
+<form asp-controller="Admin" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="MenuId" />
+
     <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" asp-for="MenuName" required>
+        <label class="form-label">Menu Name</label>
+        <input asp-for="MenuName" class="form-control" required />
     </div>
+
     <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea class="form-control" asp-for="Description" required></textarea>
+        <textarea asp-for="Description" class="form-control" required></textarea>
     </div>
+
     <div class="mb-3">
         <label class="form-label">Price</label>
-        <input type="number" class="form-control" asp-for="Price" required>
+        <input asp-for="Price" type="number" class="form-control" required />
     </div>
-    <button type="submit" class="btn btn-primary">Update Item</button>
+
+    <div class="mb-3">
+        <label class="form-label">Menu Type</label>
+        <input asp-for="MenuType" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="AdminMenu" class="btn btn-secondary">Cancel</a>
 </form>
+
 

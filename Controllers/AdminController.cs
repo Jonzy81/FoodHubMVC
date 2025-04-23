@@ -46,7 +46,7 @@ namespace FoodHubMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginUser)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/account/login", loginUser);   //Gör anrop mot api
+            var response = await _httpClient.PostAsJsonAsync("api/account/login", loginUser);   
 
             if (!response.IsSuccessStatusCode)
             {
@@ -59,7 +59,7 @@ namespace FoodHubMVC.Controllers
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token.Token);
 
-            var claims = jwtToken.Claims.ToList();  //saves claims (name, password etc) 
+            var claims = jwtToken.Claims.ToList(); 
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -90,7 +90,9 @@ namespace FoodHubMVC.Controllers
         [HttpGet("add")]
         public IActionResult Add()
         {
-            return View("Add");  
+            var menuTypes = new List<string> { "Förrätt", "Varmrätt", "Dessert" };
+            ViewBag.MenuTypes = menuTypes;
+            return View();
         }
 
         [HttpPost("add")]
@@ -128,18 +130,31 @@ namespace FoodHubMVC.Controllers
         [HttpPost("edit/{id}")]
         public async Task<IActionResult> Edit(MenuItemViewModel menuItem)
         {
+            if (menuItem.MenuId == 0) // Ensure MenuId is valid
+            {
+                Console.WriteLine("❌ Error: MenuId is missing!");
+                return BadRequest("Invalid menu item ID.");
+            }
+
+            Console.WriteLine($"🟢 Sending update request for MenuId: {menuItem.MenuId}");
+
             var json = JsonConvert.SerializeObject(menuItem);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            Console.WriteLine($"📡 Sending API request to: /api/menuitem/{menuItem.MenuId}");
 
             var response = await _httpClient.PutAsync($"/api/menuitem/{menuItem.MenuId}", content);
 
             if (!response.IsSuccessStatusCode)
             {
-                return View("Edit", menuItem);
+                Console.WriteLine($"❌ API call failed! Status: {response.StatusCode}");
+                return View("Edit", menuItem); // Stay on the page if update fails
             }
 
+            Console.WriteLine("✅ Update Successful!");
             return RedirectToAction("AdminMenu");
         }
+
 
         [HttpPost("delete/{id}")]
         public async Task<IActionResult> Delete(int id)

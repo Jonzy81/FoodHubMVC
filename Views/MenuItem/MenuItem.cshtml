@@ -1,33 +1,74 @@
 ﻿@model IEnumerable<MenuItemViewModel>
 
+@{
+    var menuOrder = new List<string> { "Förrätt", "Varmrätt", "Dessert" };
+}
+
 <div class="container bg-primary">
-    <!-- Group the menu items by MenuType -->
-    @foreach (var group in Model.GroupBy(item => item.MenuType))
+    <h2 class="text-white text-center mb-4">Menu</h2>
 
-    {
-        <!-- Display MenuType as a section title -->
-        <h3 class="mt-4 text-white bg-success p-3 rounded">@group.Key</h3> <!-- Group.Key represents the MenuType -->
-        <!-- List items under each MenuType -->
-        <ul class="list-group mb-4">
-            @foreach (var item in group)
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="categoryFilter" class="form-label text-white">Filter by Category:</label>
+            <select id="categoryFilter" class="form-select">
+                <option value="">All</option>
+                <option value="Förrätt">Förrätt</option>
+                <option value="Varmrätt">Varmrätt</option>
+                <option value="Dessert">Dessert</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="priceFilter" class="form-label text-white">Filter by Max Price:</label>
+            <input type="number" id="priceFilter" class="form-control" placeholder="Enter max price">
+        </div>
+    </div>
 
-            {
-                <content class="d-flex flex-row align-items-start">
-                <li class="menuContainer list-group-item bg-secondary text-white mb-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="menu-name fw-bold">
-                                @item.MenuName
+    <div id="menuContainer">
+        @foreach (var group in Model.GroupBy(item => item.MenuType)
+        .OrderBy(g => menuOrder.IndexOf(g.Key)))
+        {
+            <h3 class="mt-4 text-white bg-success p-3 rounded">@group.Key</h3>
+            <ul class="list-group mb-4">
+                @foreach (var item in group)
+                {
+                    <li class="menuContainer list-group-item bg-secondary text-white mb-2 menu-item" data-category="@item.MenuType" data-price="@item.Price">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="menu-name fw-bold">@item.MenuName</div>
+                            <div class="menuPrice ms-auto">@item.Price spänn</div>
                         </div>
-                        <div class="menuPrice ms-auto">
-                                @item.Price spänn
+                        <div class="menu-description text-start">
+                            <em>@item.Description</em>
                         </div>
-                    </div>
-                    <div class="menu-description text-start">
-                        <em>@item.Description</em>
-                    </div>
-                </li>
-                </content>
-            }
-        </ul>
-    }
+                    </li>
+                }
+            </ul>
+        }
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const categoryFilter = document.getElementById("categoryFilter");
+        const priceFilter = document.getElementById("priceFilter");
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        function filterMenu() {
+            const selectedCategory = categoryFilter.value;
+            const maxPrice = parseFloat(priceFilter.value) || Infinity;
+
+            menuItems.forEach(item => {
+                const itemCategory = item.getAttribute("data-category");
+                const itemPrice = parseFloat(item.getAttribute("data-price"));
+
+                if ((selectedCategory === "" || itemCategory === selectedCategory) && itemPrice <= maxPrice) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        categoryFilter.addEventListener("change", filterMenu);
+        priceFilter.addEventListener("input", filterMenu);
+    });
+</script>

@@ -1,51 +1,47 @@
 ﻿@model IEnumerable<MenuItemViewModel>
 
-<div class="container bg-primary">
-    <h2 class="text-white text-center mb-4">Admin Menu Management</h2>
+@{
+    var menuOrder = new List<string> { "Förrätt", "Varmrätt", "Dessert" };
+}
 
-    <!-- Button to add a new menu item -->
+<div class="container bg-primary">
+    <h2 class="text-white text-center mb-4">City Wok worlds best managment!</h2>
+
     <div class="text-center mb-3">
-        <a class="btn btn-success" asp-action="Add">Add New Menu Item</a>
+        <a class="btn btn-danger" asp-action="Add">Add New Menu Item</a>
     </div>
 
-    <!-- Group the menu items by MenuType -->
-    @foreach (var group in Model.GroupBy(item => item.MenuType))
-
+    @foreach (var group in Model.GroupBy(item => item.MenuType)
+    .OrderBy(g => menuOrder.IndexOf(g.Key)))
     {
-        <!-- Display MenuType as a section title -->
-        <h3 class="mt-4 text-white bg-success p-3 rounded">@group.Key</h3> <!-- Group.Key represents the MenuType -->
-        <!-- List items under each MenuType -->
+        <h3 class="mt-4 text-white bg-success p-3 rounded w-100 text-center">@group.Key</h3>
         <ul class="list-group mb-4">
             @foreach (var item in group)
             {
                 <li class="menuContainer list-group-item bg-secondary text-white mb-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <div class="d-flex flex-row">
-                                <div class="menu-name fw-bold">@item.MenuName</div>
-                                <div class="menu-price text-end ms-auto">@item.Price spänn</div>
-                            </div>
-                            <div class="menu-description">
-                                <em>@item.Description</em>
+                    <div class="row align-items-center">
+                        <div class="col fw-bold text-start">
+                            @item.MenuName
+                        </div>
+                        <div class="col-auto text-end fw-bold">
+                            @item.Price spänn
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.MenuId">Edit</a></li>
+                                    <li>
+                                        <form asp-controller="Admin" asp-action="Delete" asp-route-id="@item.MenuId" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                            <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-
-                        <!-- Dropdown Menu for Edit & Delete -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown">
-                                Action
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.MenuId">Edit</a></li>
-
-                                <li>
-                                    <form asp-controller="Admin" asp-action="Delete" asp-route-id="@item.MenuId" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                        <button type="submit" class="dropdown-item text-danger">Delete</button>
-                                    </form>
-                                </li>
-
-                            </ul>
-                        </div>
+                    </div>
+                    <div class="menu-description text-start">
+                        <em>@item.Description</em>
                     </div>
                 </li>
             }
